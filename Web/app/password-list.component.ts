@@ -27,14 +27,15 @@ export class PasswordListComponent {
     }
 
     public addPassword() {
-        let password = {
-            id: -1,
-            description: this.newDescription,
-            password: this.newPassword
+        let password: Password = {
+            PasswordId: -1,
+            Description: this.newDescription,
+            PasswordText: this.newPassword,
+            UserName: ""
         };
 
         this.passwordService.addPassword(password).then((id: number) => {
-            password.id = id;
+            password.PasswordId = id;
             this.newDescription = "";
             this.newPassword = "";
             this.passwords.push(password);
@@ -43,7 +44,7 @@ export class PasswordListComponent {
 
     public removePassword(id: number) {
         this.passwordService.removePassword(id).then(() => {
-            var index = this.passwords.findIndex((password) => password.id == id);
+            var index = this.passwords.findIndex((password) => password.PasswordId == id);
             this.passwords.splice(index, 1);
         })
     }
